@@ -11,14 +11,20 @@
 
             <!-- This section should be hidden by default and shown when there are todos -->
             <section class="main" v-if="todos.length">
-                <input id="toggle-all" class="toggle-all" type="checkbox">
+                <input
+                    @click="toggleAllStatus"
+                    id="toggle-all"
+                    class="toggle-all"
+                    type="checkbox"
+                    :checked="isAllComplete"
+                >
                 <label for="toggle-all">Mark all as complete</label>
                 <ul class="todo-list">
                     <!-- These are here just to show the structure of the list items -->
                     <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
-                    <li v-for="todo in todos"
+                    <li v-for="(todo, index) in todos"
                         :class="{ completed: todo.isDone, editing: todo === editing }"
-                        :key="todo.text"
+                        :key="index"
                     >
                         <div class="view">
                             <input class="toggle" type="checkbox" v-model="todo.isDone">
@@ -76,9 +82,8 @@
 
 <script>
 const LOCAL_STORAGE_KEY = 'todo-app-vue';
-
 export default {
-    name: 'todo',
+    name: 'Todo',
     data() {
         return {
             title: 'Todos',
@@ -87,13 +92,14 @@ export default {
                 { text: 'Learn Vue', isDone: false },
                 { text: 'Build something awesome', isDone: false },
             ],
-            editing: null
+            editing: null,
+            toggle: false
         }
     },
     methods: {
         createTodo(event) {
             const textbox = event.target;
-            this.todos.push({text: textbox.value, isDone: false});
+            this.todos.push({text: textbox.value.trim(), isDone: false});
             textbox.value = '';
         },
         startEditing(todo) {
@@ -114,7 +120,14 @@ export default {
         },
         clearCompleted() {
             this.todos = this.activeTodos;
-        }
+        },
+        toggleAllStatus(){
+            const val = !this.isAllComplete
+            this.todos = this.todos.map(item => ({
+                text: item.text,
+                isDone: val
+            }))
+        },
     },
     computed: {
         activeTodos() {
@@ -122,6 +135,9 @@ export default {
         },
         completedTodos() {
             return this.todos.filter(t => t.isDone);
+        },
+        isAllComplete(){
+            return this.todos.length > 0 && (this.todos.length === this.completedTodos.length)
         }
     },
     watch: {
