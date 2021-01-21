@@ -17,16 +17,16 @@
                    @blur="finishEditing"
                    :value="todo.text"
             >
-            <font-awesome-icon @click="toggleFooter(index)" v-if="!todo.view" class="fa-icon" icon="chevron-down" />
+            <font-awesome-icon @click="toggleFooter(index)" v-if="!todo.view" class="fa-icon" icon="chevron-down"/>
             <div class="card-footer" :class="{ hidden: !todo.view, descEditing: descEditing }">
-                <p> {{extractText(todo.desc)}}</p>
-                <input class="edit"
-                       @keyup.enter="finishEditingDesc"
-                       :value="todo.desc"
-                >
-                <font-awesome-icon @click="startEditingDesc(todo)" id="edit-icon" icon="edit" />
+                <p> {{ extractText(todo.desc) }}</p>
+<!--                <input class="edit"-->
+<!--                       @keyup.enter="finishEditingDesc"-->
+<!--                       :value="todo.desc"-->
+<!--                >-->
+                <font-awesome-icon @click="startEditingDesc(todo)" id="edit-icon" icon="edit"/>
             </div>
-            <font-awesome-icon @click="toggleFooter(index)" v-if="todo.view" class="fa-icon-visible" icon="chevron-up" />
+            <font-awesome-icon @click="toggleFooter(index)" v-if="todo.view" class="fa-icon-visible" icon="chevron-up"/>
         </li>
     </ul>
 </template>
@@ -38,9 +38,11 @@ const LOCAL_STORAGE_KEY = 'todo-app-vue';
 
 export default {
     name: "Card",
-    methods:{
+    methods: {
         finishEditing(event) {
-            if (!this.editing) { return; }
+            if (!this.editing) {
+                return;
+            }
             const textbox = event.target;
             this.$store.dispatch('setEditText', {text: textbox.value.trim()})
             this.$store.dispatch('setEdit', {val: null})
@@ -54,20 +56,23 @@ export default {
         destroyTodo(index) {
             this.$store.dispatch('destroyTodo', {index})
         },
-        toggleFooter(index){
+        toggleFooter(index) {
             this.$store.dispatch('toggleFooter', {index})
         },
-        extractText(text){
-            if(text !== ""){
+        extractText(text) {
+            if (text !== "") {
                 return text
             }
             return "Ops. There is no description yet."
         },
-        startEditingDesc(todo){
-            this.$store.dispatch('setDesc', {val: todo})
+        startEditingDesc(todo) {
+            return; // WIP
+            // this.$store.dispatch('setDesc', {val: todo})
         },
-        finishEditingDesc(event){
-            if (!this.descEditing) { return; }
+        finishEditingDesc(event) {
+            if (!this.descEditing) {
+                return;
+            }
             const textbox = event.target;
             this.$store.dispatch('setDescText', {text: textbox.value.trim()})
             this.$store.dispatch('setDesc', {val: null})
@@ -90,7 +95,3 @@ export default {
     },
 }
 </script>
-
-<style scoped>
-
-</style>

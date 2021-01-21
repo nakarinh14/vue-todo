@@ -25,22 +25,22 @@ export default {
                 isDone: val.status
             }))
         },
-        toggleFooter(state, val){
+        toggleFooter(state, val) {
             state.todos[val.index].view = !state.todos[val.index].view
         },
-        clearCompleted(state, val){
+        clearCompleted(state, val) {
             state.todos = val.todos;
         },
-        setEdit(state, val){
+        setEdit(state, val) {
             state.editing = val.val;
         },
-        setEditText(state, val){
+        setEditText(state, val) {
             state.editing.text = val.text
         },
-        setDesc(state, val){
+        setDesc(state, val) {
             state.descEditing = val.val
         },
-        setDescText(state, val){
+        setDescText(state, val) {
             state.descEditing.desc = val.text
         }
     },
@@ -55,22 +55,22 @@ export default {
         toggleAllStatus({commit, getters}) {
             commit('toggleAllStatus', {status: !getters.isAllComplete})
         },
-        toggleFooter({commit}, payload){
+        toggleFooter({commit}, payload) {
             commit('toggleFooter', payload)
         },
-        clearCompleted({commit, getters}){
+        clearCompleted({commit, getters}) {
             commit('clearCompleted', {todos: getters.activeTodos})
         },
-        setEdit({commit}, payload){
+        setEdit({commit}, payload) {
             commit('setEdit', payload)
         },
-        setEditText({commit}, payload){
+        setEditText({commit}, payload) {
             commit('setEditText', payload)
         },
-        setDesc({commit}, payload){
+        setDesc({commit}, payload) {
             commit('setDesc', payload)
         },
-        setDescText({commit}, payload){
+        setDescText({commit}, payload) {
             commit('setDescText', payload)
         }
     },
@@ -85,13 +85,13 @@ export default {
         activeTodos(state) {
             return state.todos.filter(t => !t.isDone);
         },
-        isAllComplete(state, getter){
+        isAllComplete(state, getter) {
             return state.todos.length === getter.completedTodos.length
         },
-        editing(state){
+        editing(state) {
             return state.editing
         },
-        descEditing(state){
+        descEditing(state) {
             return state.descEditing
         }
     }

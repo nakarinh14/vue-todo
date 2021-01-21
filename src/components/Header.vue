@@ -15,7 +15,7 @@ export default {
         createTodo(event) {
             const textbox = event.target;
             // prevent empty string being appended
-            if(textbox.value.trim().length > 0){
+            if (textbox.value.trim().length > 0) {
                 this.$store.dispatch('pushTodos', {text: textbox.value.trim()})
                 textbox.value = '';
             }
@@ -23,7 +23,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>

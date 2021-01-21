@@ -2,52 +2,21 @@
     <div>
         <section class="todoapp">
             <Header></Header>
-            <!-- This section should be hidden by default and shown when there are todos -->
-            <section class="main" v-if="todos.length">
-                <input
-                    @click="toggleAllStatus"
-                    id="toggle-all"
-                    class="toggle-all"
-                    type="checkbox"
-                    :checked="isAllComplete"
-                >
-                <label for="toggle-all">Mark all as complete</label>
-                <Card></Card>
-            </section>
+            <Main></Main>
             <Footer></Footer>
-        </section>
-        <section>
-            <p>Default</p>
         </section>
     </div>
 
 </template>
 
 <script>
-
-import Card from "@/components/Card";
-import { mapGetters, mapActions } from 'vuex'
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-
+import Main from "@/components/Main";
 
 
 export default {
     name: 'Todo',
-    components: {Header, Footer, Card},
-    methods: {
-        ...mapActions([
-            'clearCompleted',
-            'toggleAllStatus'
-        ]),
-    },
-    computed: {
-        ...mapGetters([
-            'isAllComplete',
-            'todos'
-        ])
-
-    },
-
+    components: {Main, Header, Footer}
 }
 </script>
