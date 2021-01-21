@@ -37,6 +37,69 @@ body {
 	outline: 0;
 }
 
+.card-footer {
+    background-color: rgb(255, 251, 239);
+    border-top-color: #dcdcdc;
+    border-bottom-color: #dcdcdc;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-width: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-footer p{
+	font-size: 15px;
+	text-align: center;
+	color: #999999;
+	display: inline-block;
+}
+
+.descEditing p {
+    display: none;
+}
+
+.descEditing input{
+    display: inline-block;
+}
+
+.fa-icon-visible {
+	margin: auto;
+	text-align: center;
+	color: darkgrey;
+	display: block;
+	cursor: pointer;
+}
+
+.fa-icon{
+	margin: auto;
+	text-align: center;
+	color: #e0e0e0;
+	opacity: 0.6;
+	transition: 0.3s;
+	display: none
+}
+
+.todo-list li .fa-icon:hover {
+	color: grey;
+	cursor: pointer;
+}
+
+.todo-list li:hover .fa-icon {
+	display: block;
+}
+
+#edit-icon {
+	font-size: 15px;
+	display: inline-block;
+	margin-left: 15px;
+	color: #969595;
+	cursor: pointer;
+}
+
+
+
 .hidden {
 	display: none;
 }
@@ -183,7 +246,7 @@ body {
 	position: absolute;
 	top: 0;
 	bottom: 0;
-	margin: auto 0;
+	margin: 5px 5px 0;
 	border: none; /* Mobile Safari */
 	-webkit-appearance: none;
 	appearance: none;
@@ -221,17 +284,16 @@ body {
 }
 
 .todo-list li .destroy {
-	display: none;
 	position: absolute;
+	display: none;
 	top: 0;
 	right: 10px;
 	bottom: 0;
 	width: 40px;
 	height: 40px;
-	margin: auto 0;
 	font-size: 30px;
 	color: #cc9a9a;
-	margin-bottom: 11px;
+	margin: 5px 0 11px;
 	transition: color 0.2s ease-out;
 }
 
